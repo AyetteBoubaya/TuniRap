@@ -1,0 +1,155 @@
+<div class="chat-container">
+  <h2> Prédire le Niveau du projet</h2>
+  
+  <!-- Affichage du fil de discussion -->
+  <div class="chat-box">
+      <div *ngFor="let msg of chat" [ngClass]="{'bot-msg': msg.from==='bot', 'user-msg': msg.from==='user'}">
+          <span class="avatar">
+              <!--img [src]="msg.from === 'bot' ? 'assets/images/image-chatbot.avif' : 'assets/images/image-nermine.jpg'" 
+                   alt="avatar" 
+                   class="avatar-img"-->
+          </span>
+          {{ msg.text }}
+          <span class="message-time">{{ msg.timestamp | date:'HH:mm' }}</span>
+      </div>
+      
+      <!-- Indicateur de saisie du bot -->
+      <div *ngIf="isTyping" class="typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <span class="message-time">{{ currentTime | date:'HH:mm' }}</span>
+      </div>
+  </div>
+
+  <!-- Zone de saisie -->
+  <div *ngIf="!finished" class="input-area">
+      <input
+          [(ngModel)]="currentAnswer"
+          [type]="currentType"
+          (keyup.enter)="sendAnswer()"
+          [placeholder]="questions[currentIndex]?.text || 'Écrivez votre réponse...'"
+      />
+      <button (click)="sendAnswer()">Envoyer</button>
+  </div>
+
+  <!-- Affichage du résultat -->
+  <div *ngIf="finished && prediction" class="result-card">
+      <div class="prediction-section">
+          <p><strong>Niveau du cours :</strong> {{ prediction.predicted_level }}</p>
+          <p>{{ prediction.explanation }}</p>
+      </div>
+      
+      <div class="popularity-section">
+          <strong>Analyse de popularité :</strong>
+          
+          <div class="popularity-meter-container">
+              <div class="popularity-meter">
+                  <div class="popularity-indicator" [style.left]="(prediction.popularity_probability * 100) + '%'"></div>
+              </div>
+              <div class="popularity-labels">
+                  <span>0%</span>
+                  <span>50%</span>
+                  <span>100%</span>
+              </div>
+          </div>
+          
+          <div class="popularity-summary" [ngClass]="{
+              'text-success': prediction.popularity_probability > 0.7,
+              'text-warning': prediction.popularity_probability > 0.3 && prediction.popularity_probability <= 0.7,
+              'text-danger': prediction.popularity_probability <= 0.3
+          }">
+              {{ prediction.popularity_probability > 0.7 ? '✅' : 
+                 prediction.popularity_probability > 0.3 ? '⚠️' : '❌' }}
+              <strong>{{ (prediction.popularity_probability * 100) | number:'1.0-0' }}%</strong>  
+              {{ prediction.popularity_probability > 0.7 ? 'Très populaire' : 
+                 prediction.popularity_probability > 0.3 ? 'Moyennement populaire' : 'Peu populaire' }}
+          </div>
+          
+          <div class="popularity-details">
+              <p><small>{{ prediction.popularity_explanation }}</small></p>
+              <ul>
+                  <li>Note: {{ model.rating }}/5</li>
+                  <li>Avis: {{ model.reviewcount }}</li>
+                  <li>Durée: {{ model.duration }}h</li>
+                  <li>Leçons: {{ model.lectures }}</li>
+              </ul>
+          </div>
+      </div>
+      
+      <div class="detailed-analysis" *ngIf="showDetailedAnalysis">
+          <h4>Analyse approfondie</h4>
+          <table>
+              <tr><th>Critère</th><th>Valeur</th><th>Évaluation</th></tr>
+              <tr>
+                  <td>Note</td>
+                  <td>{{ model.rating }}/5</td>
+                  <td>{{ getRatingEvaluation(model.rating) }}</td>
+              </tr>
+              <tr>
+                  <td>Nombre d'avis</td>
+                  <td>{{ model.reviewcount }}</td>
+                  <td>{{ getReviewCountEvaluation(model.reviewcount) }}</td>
+              </tr>
+              <tr>
+                  <td>Durée</td>
+                  <td>{{ model.duration }}h</td>
+                  <td>{{ getDurationEvaluation(model.duration) }}</td>
+              </tr>
+              <tr>
+                  <td>Leçons</td>
+                  <td>{{ model.lectures }}</td>
+                  <td>{{ getLecturesEvaluation(model.lectures) }}</td>
+              </tr>
+          </table>
+          <p class="probability-display">
+              Probabilité de popularité: 
+              <span class="probability-value" [ngClass]="{
+                  'text-success': prediction.popularity_probability > 0.7,
+                  'text-warning': prediction.popularity_probability > 0.3 && prediction.popularity_probability <= 0.7,
+                  'text-danger': prediction.popularity_probability <= 0.3
+              }">
+                  {{ (prediction.popularity_probability * 100) | number:'1.0-0' }}%
+              </span>
+          </p>
+          <p class="final-assessment">{{ prediction.popularity_explanation }}</p>
+      </div>
+      
+      <button *ngIf="!showDetailedAnalysis" class="btn btn-info mt-3" (click)="toggleDetailedAnalysis()">
+          Voir l'analyse détaillée
+      </button>
+    
+      
+      
+      <!-- Ajoutez cette section juste avant les boutons d'action -->
+<div class="feedback-section">
+    <h4>Évaluez cette prédiction :</h4>
+    <div class="feedback-buttons">
+      <button (click)="setFeedback('good')" 
+              [class.active]="currentFeedback === 'good'"
+              class="feedback-btn good">
+        👍 Bonne prédiction
+      </button>
+      <button (click)="setFeedback('bad')"
+              [class.active]="currentFeedback === 'bad'"
+              class="feedback-btn bad">
+        👎 Prédiction incorrecte
+      </button>
+    </div>
+  </div>
+  
+  <div class="action-buttons">
+    <button (click)="saveConversation(prediction)" 
+            [disabled]="!currentFeedback"
+            class="save-button">
+      {{ currentFeedback ? 'Enregistrer avec feedback' : 'Veuillez donner un feedback' }}
+    </button>
+    <button (click)="saveConversation(prediction)" class="save-button">
+        Enregistrer la conversation
+      </button>
+    <button (click)="navigateToHistory()" class="history-button">
+      Voir l'historique
+    </button>
+  </div>
+  </div>
+</div>

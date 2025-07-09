@@ -1,0 +1,17 @@
+<div class="notification-sidebar" [class.open]="isOpen">
+  <div class="sidebar-header">
+    <h4>Notifications</h4>
+    <button class="close-btn" (click)="onClose()">×</button>
+  </div>
+
+  <div class="sidebar-body">
+    <p *ngIf="notifications.length === 0">Aucune notification pour ce profil.</p>
+
+    <ul *ngIf="notifications.length > 0">
+      <li *ngFor="let noti of notifications">
+        <h5>{{ noti.title }}</h5>
+        <small>{{ noti.date }}</small>
+      </li>
+    </ul>
+  </div>
+</div>

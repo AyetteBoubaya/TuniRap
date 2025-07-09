@@ -1,0 +1,159 @@
+.users-edit {
+  .card {
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .nav-tabs {
+    border-bottom: none;
+
+    .nav-link {
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.7rem 0.7rem 0 0;
+      transition: all 0.4s ease;
+      font-weight: 600;
+      color: #718096;
+
+      &:hover {
+        color: #fff;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      &.active {
+        color: #fff;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+      }
+    }
+  }
+
+  .media {
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    img {
+      transition: all 0.4s ease;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: scale(1.08) rotate(3deg);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+
+    label {
+      font-weight: 600;
+      color: #4A5568;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    input,
+    select {
+      border-radius: 0.6rem;
+      border: 1px solid #e2e8f0;
+      transition: all 0.35s ease;
+      padding: 0.75rem 1rem;
+
+      &:focus {
+        border-color: #764ba2;
+        box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15);
+      }
+    }
+  }
+
+  .btn {
+    border-radius: 0.6rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.4s ease;
+
+    &.btn-primary {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      color: #fff;
+
+      &:hover {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+        box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+        transform: translateY(-2px);
+      }
+    }
+
+    &.btn-secondary {
+      background-color: #edf2f7;
+      color: #4A5568;
+      border: none;
+
+      &:hover {
+        background-color: #e2e8f0;
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .users-module {
+    table {
+      thead {
+        background-color: #f7fafc;
+        th {
+          padding: 1rem;
+          color: #4A5568;
+        }
+      }
+
+      tbody {
+        tr {
+          transition: all 0.35s ease;
+
+          &:hover {
+            background: linear-gradient(90deg, #f0f4f8, #fafafa);
+            transform: scale(1.01);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+          }
+
+          td {
+            padding: 0.9rem;
+
+            .checkbox input[type="checkbox"] {
+              accent-color: #764ba2;
+              width: 1.2rem;
+              height: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .birthdate-picker {
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #764ba2;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

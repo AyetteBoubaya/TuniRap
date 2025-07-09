@@ -1,0 +1,139 @@
+// Variables modernes
+$primary: #ff4b5c;
+$secondary: #ffeaea;
+$background: #f5f7fa;
+$card-bg: rgba(255, 255, 255, 0.3);
+$blur: 20px;
+$border-radius: 20px;
+$transition: 0.35s ease;
+$text-dark: #2e2e2e;
+$shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+// Body
+body {
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  font-family: 'Poppins', sans-serif;
+  color: $text-dark;
+}
+
+// Card avec effet glassmorphism
+.card {
+  background: $card-bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  overflow: hidden;
+  animation: fadeInUp 0.8s $transition forwards;
+  opacity: 0;
+}
+
+// Form Control moderne
+.form-control {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: $transition;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.05);
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 0 3px rgba(255, 75, 92, 0.2);
+  }
+}
+
+.is-valid {
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+.is-invalid {
+  box-shadow: 0 0 0 3px rgba(255, 193, 49, 0.3);
+}
+
+// Bouton gradient moderne
+.bg-red-gradient {
+  background: linear-gradient(135deg, #ff4b5c, #ff7e5f);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: $transition;
+  box-shadow: 0 4px 14px rgba(255, 75, 92, 0.4);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 75, 92, 0.6);
+  }
+}
+
+// Register bouton clair
+.bg-very-light-danger {
+  background: linear-gradient(135deg, #f8d7da, #ffe0e0);
+  color: $primary;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  transition: $transition;
+
+  &:hover {
+    background: linear-gradient(135deg, #fddde0, #ffeaea);
+  }
+}
+
+// Checkbox custom ultra clean
+.checkbox input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $primary;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: $transition;
+
+  &:checked {
+    background: $primary;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba(255, 75, 92, 0.2);
+  }
+}
+
+// Image background côté gauche
+.auth-img-bg {
+  background: linear-gradient(135deg, #4dd191, #feb47b);
+  border-radius: $border-radius;
+  padding: 2rem;
+}
+
+// Social icons modernes
+.login-options a {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  color: $primary;
+  padding: 0.6rem;
+  transition: $transition;
+  margin-left: 0.5rem;
+
+  &:hover {
+    background: $primary;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 75, 92, 0.3);
+  }
+}
+
+// Animation fadeInUp
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

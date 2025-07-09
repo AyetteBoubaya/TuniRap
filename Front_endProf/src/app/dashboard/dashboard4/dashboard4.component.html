@@ -1,0 +1,127 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Gestion des demandes de participation</h2>
+
+  <!-- Filtres -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3 class="mb-0">Filtres</h3>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="statusFilter" class="form-label">Statut :</label>
+          <select id="statusFilter" class="form-select" (change)="applyFilter()">
+            <option value="all">Toutes les demandes</option>
+            <option value="pending">En attente</option>
+            <option value="approved">Approuvées</option>
+            <option value="rejected">Rejetées</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="eventFilter" class="form-label">Événement :</label>
+          <select id="eventFilter" class="form-select">
+            <option *ngFor="let event of getUniqueEvents()" [value]="event.id">{{ event.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Liste des demandes -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Liste des demandes</h3>
+      <button class="btn btn-primary" (click)="showRequestForm = !showRequestForm">
+        <i class="bi bi-plus-circle"></i> Nouvelle demande
+      </button>
+    </div>
+    <div class="card-body">
+      <!-- Formulaire de nouvelle demande -->
+      <div *ngIf="showRequestForm" class="mb-4 p-3 border rounded">
+        <h4>Créer une demande</h4>
+        <div class="mb-3">
+          <label for="eventSelect" class="form-label">Événement :</label>
+          <select id="eventSelect" class="form-select" [(ngModel)]="selectedEventId">
+            <option *ngFor="let event of getUniqueEvents()" [value]="event.id">{{ event.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="requestMessage" class="form-label">Message :</label>
+          <textarea id="requestMessage" class="form-control" [(ngModel)]="newRequestMessage" rows="3"
+            placeholder="Expliquez pourquoi vous souhaitez participer..."></textarea>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-success" (click)="submitRequest()">Envoyer</button>
+          <button class="btn btn-outline-secondary" (click)="showRequestForm = false">Annuler</button>
+        </div>
+      </div>
+      <!-- Message si aucune demande -->
+      <div *ngIf="filteredRequests.length === 0" class="alert alert-info">
+        Aucune demande ne correspond aux critères sélectionnés.
+      </div>
+      <!-- Tableau des demandes -->
+      <div class="table-responsive" *ngIf="filteredRequests.length > 0">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Événement</th>
+              <th>Demandeur</th>
+              <th>Email</th>
+              <th>Date</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let request of filteredRequests">
+              <td>{{ request.eventName }}</td>
+              <td>{{ request.userName }}</td>
+              <td>{{ request.userEmail }}</td>
+              <td>{{ request.requestDate | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <span class="badge rounded-pill"
+                  [ngClass]="{
+                    'text-bg-warning': request.status === 'pending',
+                    'text-bg-success': request.status === 'approved',
+                    'text-bg-danger': request.status === 'rejected'
+                  }">
+                  {{ getStatusLabel(request.status) }}
+                </span>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                  <ng-container *ngIf="request.status === 'pending'">
+                    <button class="btn btn-sm btn-success" (click)="updateRequestStatus(request.id, 'approved')"
+                      title="Approuver">
+                      <i class="bi bi-check"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="updateRequestStatus(request.id, 'rejected')"
+                      title="Rejeter">
+                      <i class="bi bi-x"></i>
+                    </button>
+                  </ng-container>
+                  <button class="btn btn-sm btn-outline-info" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#message-' + request.id" title="Voir message">
+                    <i class="bi bi-chat-text"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteRequest(request.id)" title="Supprimer">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Détails des messages (collapsible) -->
+        <div *ngFor="let request of filteredRequests">
+          <div class="collapse mt-2" [id]="'message-' + request.id">
+            <div class="card card-body">
+              <h5>Message du participant :</h5>
+              <p>{{ request.message || "Aucun message fourni." }}</p>
+              <small class="text-muted">Demande #{{ request.id }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

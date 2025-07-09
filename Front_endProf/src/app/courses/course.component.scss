@@ -1,0 +1,1281 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.category-dropdown {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus,
+.category-dropdown:focus {
+  border-color: #80ff00;
+  box-shadow: 0 0 10px rgba(128, 255, 0, 0.5);
+}
+
+.search-input::placeholder,
+.category-dropdown::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.search-input:hover,
+.category-dropdown:hover {
+  border-color: #007bff;
+}
+
+.clear-button {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 25px;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-input,
+  .category-dropdown,
+  .clear-button {
+    width: 100%;
+  }
+}
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: modalIn 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Add Course Form */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+  border-color: #007bff;
+}
+
+button[type="submit"] {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.btn-close {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Course Cards */
+.course-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Fixed column size */
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  width: 100%; /* Ensure full width */
+  max-width: 300px; /* Fixed maximum width */
+  margin: 0 auto; /* Center the card */
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background-color: #f9f9f9;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.card-trainer {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.course-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.card-body {
+  padding: 10px 0;
+}
+
+.card-description,
+.card-level {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.badge {
+  background-color: #80ff00;
+  color: #000;
+  border-radius: 12px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  text-align: center;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.stars-container {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 1.2rem;
+  color: #ddd;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+.star.partial {
+  color: #ffd700;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.rating-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-review-button {
+  background-color: #30c5c5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.add-review-button:hover {
+  background-color: #28a7a7;
+}
+
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.card-footer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+/* Recommendation Section - Updated Styles */
+.recommendation-container {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  max-width: 1200px; /* Limit width and center */
+}
+
+.recommendation-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.recommendation-header-controls h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin: 0;
+}
+
+/* Scroller Container */
+.recommendation-scroller {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center cards horizontally */
+}
+
+.recommendation-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.recommendation-track {
+  display: flex;
+  gap: 1rem;
+  padding: 0 1rem; /* Add padding on sides */
+  justify-content: center; /* Center cards */
+  flex-wrap: nowrap;
+}
+
+/* Smaller Recommendation Card */
+.recommendation-card {
+  flex: 0 0 220px; /* Smaller fixed width */
+  margin: 0 5px; /* Small margin between cards */
+}
+
+.rcard {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f1f1f1;
+}
+
+/* Smaller image container */
+.rcard-image-container {
+  position: relative;
+  height: 120px; /* Reduced height */
+  overflow: hidden;
+}
+
+/* Smaller content padding */
+.rcard-content {
+  padding: 0.75rem;
+  flex: 1;
+}
+
+.rcard-title {
+  font-size: 0.95rem; /* Smaller title */
+  margin: 0 0 8px;
+}
+
+.rcard-description {
+  font-size: 0.8rem; /* Smaller description */
+  line-height: 1.4;
+}
+
+.rcard-footer {
+  padding: 0 0.75rem 0.75rem;
+}
+
+/* Rating adjustments */
+.rcard-rating i {
+  font-size: 12px; /* Smaller stars */
+}
+
+.rating-value {
+  font-size: 11px;
+}
+
+/* Badge adjustments */
+.rcard-badge {
+  font-size: 10px;
+  padding: 3px 8px;
+}
+
+/* Button adjustments */
+.rcard-button {
+  padding: 8px;
+  font-size: 12px;
+}
+
+/* Recommendation Section */
+.recommendation-section {
+  margin: 2rem 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.recommendation-header {
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.recommendation-header:hover {
+  background: linear-gradient(135deg, #5d3ac2 0%, #70c4bc 100%);
+}
+
+.recommendation-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recommendation-header .badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* Recommendation Container */
+.recommendation-container {
+  padding: 1.5rem;
+}
+
+/* Scroller */
+.recommendation-scroller {
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.recommendation-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.recommendation-cards {
+  display: flex;
+  gap: 1rem;
+  width: max-content; /* Ensure it expands to fit content */
+  padding: 0 1rem; /* Add padding on sides */
+}
+
+/* Compact Recommendation Card */
+.recommendation-card {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.rcard {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 1px solid #eee;
+}
+
+.rcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.rcard-image-container {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+}
+
+.rcard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.rcard:hover .rcard-image {
+  transform: scale(1.05);
+}
+
+.rcard-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: #ff4757;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.rcard-content {
+  padding: 1rem;
+}
+
+.rcard-category {
+  font-size: 0.7rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.rcard-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: #2d3436;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rcard-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rcard-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.rcard-rating .stars {
+  display: flex;
+}
+
+.rcard-rating i {
+  font-size: 0.8rem;
+  color: #ffb400;
+}
+
+.rating-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.rcard-level {
+  font-size: 0.75rem;
+  background: #f1f1f1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: #555;
+}
+
+.rcard-button {
+  width: 100%;
+  background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.rcard-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(110, 69, 226, 0.2);
+}
+
+/* Scroll Controls */
+.scroll-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.scroll-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background: #e9ecef;
+  transform: scale(1.1);
+}
+
+/* No Recommendations */
+.no-recommendations {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.no-recommendations i {
+  font-size: 2rem;
+  color: #adb5bd;
+  margin-bottom: 1rem;
+}
+
+.no-recommendations p {
+  margin: 0.5rem 0;
+  color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .recommendation-card {
+    width: 200px;
+  }
+
+  .rcard-image-container {
+    height: 110px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommendation-header h3 {
+    font-size: 1rem;
+  }
+
+  .recommendation-card {
+    width: 180px;
+  }
+
+  .rcard-title {
+    font-size: 0.85rem;
+  }
+}
+/* Level badge styles */
+.level-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  /* Different colors for different levels */
+  &.beginner {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: 1px solid #90caf9;
+  }
+
+  &.intermediate {
+    background-color: #e8f5e9;
+    color: #388e3c;
+    border: 1px solid #a5d6a7;
+  }
+
+  &.advanced {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ef9a9a;
+  }
+
+  &.expert {
+    background-color: #f3e5f5;
+    color: #8e24aa;
+    border: 1px solid #ce93d8;
+  }
+}
+/* Recommendation card specific styles */
+.rcard {
+  .level-badge {
+    margin-left: 8px;
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+
+  .rcard-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .rcard-rating {
+    display: flex;
+    align-items: center;
+
+    .stars {
+      margin-right: 4px;
+
+      i {
+        font-size: 0.8rem;
+        color: #ffc107;
+      }
+    }
+
+    .rating-value {
+      font-size: 0.8rem;
+      color: #666;
+    }
+  }
+}
+
+/* Main course card specific styles */
+.course-card {
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .level-badge {
+      margin-left: 8px;
+    }
+  }
+
+  .badge {
+    background-color: #e0e0e0;
+    color: #424242;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+}
+/* Description styling */
+.course-description {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* Button Colors */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: white;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Hover Effects */
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pagination-controls button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* In your component's CSS */
+.add-review-button.reviewed {
+  background-color: #28a745;
+  cursor: not-allowed;
+}
+
+.add-review-button.reviewed:hover {
+  background-color: #28a745;
+}
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 4px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #138496;
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.round {
+  border-radius: 20px;
+}
+.add-review-button:disabled {
+  opacity: 1; /* Keep it fully visible but not clickable */
+}
+.pagination-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.pagination-controls span {
+  margin: 0 20px;
+  font-size: 16px;
+}
+/* Add Course Button */
+.add-course-button {
+  background-color: #3f51b5; /* Professional blue color */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Makes it perfectly round */
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin-left: 10px;
+}
+.btn-download-resources {
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-download-resources i {
+  font-size: 16px;
+}
+
+.btn-download-resources:hover {
+  background: linear-gradient(to right, #3b3fbc, #7a7ee0);
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-download-resources:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.fancy-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.fancy-btn i {
+  font-size: 16px;
+}
+
+.btn-pdf-download {
+  background-color: #d9534f;
+  color: white;
+}
+
+.btn-pdf-download:hover {
+  background-color: #c9302c;
+  transform: scale(1.05);
+}
+
+.btn-resources-download {
+  background-color: #0275d8;
+  color: white;
+}
+
+.btn-resources-download:hover {
+  background-color: #025aa5;
+  transform: scale(1.05);
+}
+
+.fancy-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.add-course-button:hover {
+  background-color: #303f9f; /* Darker shade on hover */
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.add-course-button:active {
+  transform: scale(0.95);
+}
+
+/* Update search container to properly align items */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Make sure clear button and add button stay together */
+.clear-button {
+  margin-right: 0; /* Remove any right margin */
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* Rest of your existing styles */
+/* Floating Plus Button */
+.floating-plus {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.floating-plus:hover {
+  background-color: #0056b3;
+}
+
+.floating-plus:active {
+  transform: scale(0.95);
+}
+
+/* Rating Stars */
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Move rating to the right */
+  margin-top: 10px;
+  padding-right: 20px; /* Add padding to the right */
+}
+
+.star {
+  font-size: 16px;
+  color: #ddd;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.star.filled {
+  color: #ffd700;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.rating-value {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+@keyframes starPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.star {
+  animation: starPop 0.5s ease-in-out;
+  animation-fill-mode: backwards;
+}
+
+.star:nth-child(1) { animation-delay: 0.1s; }
+.star:nth-child(2) { animation-delay: 0.2s; }
+.star:nth-child(3) { animation-delay: 0.3s; }
+.star:nth-child(4) { animation-delay: 0.4s; }
+.star:nth-child(5) { animation-delay: 0.5s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .course-cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .course-card {
+    max-width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .search-input,
+  .category-dropdown {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-card .card-footer button {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+.badge {
+  background-color: #80ff00;
+  color: rgb(0, 0, 0);
+  border-radius: 12px;
+  padding: 5px 12px;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Add Review Button */
+.add-review-button {
+  background-color: #30c5c5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px; /* Matching the padding of other buttons */
+  font-size: 12px; /* Matching the font size of other buttons */
+  margin-left: 10px;
+}
+
+.add-review-button .icon {
+  font-size: 18px;
+  color: #ffd700;
+  margin-right: 4px; /* Matching the margin of other buttons */
+}
+
+/* Course Image */
+.course-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
+}
+/* Rating Stars */
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Move rating to the right */
+  margin-top: 10px;
+  padding-right: 20px; /* Add padding to the right */
+}
+
+.stars-container {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 1.2rem; /* Adjust size as needed */
+  color: #ddd; /* Default color for empty stars */
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: #ffd700; /* Color for filled stars */
+}
+
+.star.partial {
+  color: #ffd700; /* Color for half-filled stars */
+}
+
+.star:hover {
+  transform: scale(1.2); /* Hover effect */
+}
+
+.rating-value {
+  margin-left: 10px;
+  font-size: 0.9rem; /* Adjust size as needed */
+  font-weight: bold;
+  color: #333;
+}
+
+/* Animation for stars */
+@keyframes starPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Delay animations for each star */
+.star:nth-child(1) { animation-delay: 0.1s; }
+.star:nth-child(2) { animation-delay: 0.2s; }
+.star:nth-child(3) { animation-delay: 0.3s; }
+.star:nth-child(4) { animation-delay: 0.4s; }
+.star:nth-child(5) { animation-delay: 0.5s; }

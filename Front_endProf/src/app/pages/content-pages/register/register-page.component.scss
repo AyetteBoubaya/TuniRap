@@ -1,0 +1,193 @@
+$primary: #ff00b7;
+$primary-hover: #fb00ff;
+$primary-dark: #a100b3;
+$bg-light: #fdfbfb;
+$text-dark: #2e2e2e;
+$transition: 0.3s ease;
+$card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+
+$secondary: #c300ff;
+$accent: #ff008c;
+$light-glow: #ff99e6;
+
+// Animation néon pulsante pour formulaire
+@keyframes formCardGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 10px $primary,
+      0 0 20px $primary-hover,
+      0 0 30px $primary-dark;
+  }
+  50% {
+    box-shadow:
+      0 0 25px $accent,
+      0 0 40px $secondary,
+      0 0 50px $light-glow;
+  }
+}
+
+
+// Animation dégradé couleur sur les Role Cards
+@keyframes roleCardGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+// Animation ligne colorée qui pulse et se déplace
+@keyframes linePulse {
+  0%, 100% {
+    background-position: 0% 0%;
+    opacity: 1;
+  }
+  50% {
+    background-position: 100% 0%;
+    opacity: 0.6;
+  }
+}
+
+// Form Card modernisée avec animation néon pulsante
+.form-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgb(155, 75, 75), rgb(146, 96, 96));
+  backdrop-filter: blur(15px);
+  transition: all 0.4s ease-in-out;
+  animation: formCardGlow 4s infinite ease-in-out;
+  padding: 2rem;
+  color: $text-dark;
+  box-shadow: 0 0 8px rgba(255, 0, 183, 0.1);
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    animation-duration: 2s;
+    border-color: $accent;
+    box-shadow:
+      0 0 30px $accent,
+      0 0 50px $secondary;
+  }
+}
+
+// Role Card modernisée avec animation de dégradé pulsant
+.role-card {
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  width: 30%;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(270deg, #fff, $light-glow, $bg-light, #fff);
+  background-size: 600% 600%;
+  animation: roleCardGradient 12s ease infinite;
+  box-shadow: $card-shadow;
+  transition: $transition;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  color: $text-dark;
+
+  &:hover {
+    animation-play-state: paused;
+    background: linear-gradient(135deg, $light-glow, $bg-light);
+    box-shadow: 0 8px 30px rgba(255, 0, 183, 0.4);
+    transform: translateY(-4px) scale(1.03);
+    color: $primary-dark;
+  }
+}
+
+// Ligne colorée animée sur hover + effet pulse
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 0;
+  background: linear-gradient(90deg, $primary, $accent, $secondary);
+  background-size: 200% 100%;
+  transition: width 0.4s ease;
+  animation: linePulse 3s linear infinite;
+  opacity: 0;
+}
+
+.role-card:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+// Card sélectionnée avec animation gradient pulsant et texte clair
+.role-card.selected {
+  background: linear-gradient(270deg, $primary-hover, $accent, $secondary);
+  background-size: 600% 600%;
+  animation: roleCardGradient 8s ease infinite;
+  color: #fff;
+  box-shadow:
+    0 0 40px $accent,
+    0 0 50px $secondary,
+    0 0 60px $primary-hover;
+
+  .role-icon {
+    color: #fff;
+  }
+}
+
+// Icône modernisée avec transition et légère animation sur hover
+.role-icon {
+  font-size: 34px;
+  margin-bottom: 12px;
+  display: block;
+  color: $primary;
+  transition: all 0.35s ease;
+
+  // Léger effet de pulse sur l'icône pour selected card
+  .role-card.selected & {
+    animation: pulseIcon 2.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulseIcon {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px $accent);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px $accent);
+  }
+}
+
+// Survol et sélection icône
+.role-card:hover .role-icon {
+  transform: scale(1.15);
+  color: $primary-hover;
+}
+
+// Séparateur modernisé avec légère animation de glow
+.vr {
+  border-left: 3px solid $primary-dark;
+  height: 80%;
+  min-height: 110px;
+  border-radius: 2px;
+  opacity: 0.8;
+  margin: 0 1.5rem;
+  box-shadow: 0 0 8px $primary-dark;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+    box-shadow: 0 0 15px $accent;
+  }
+}
+
+// Light danger BG modernisé avec léger glow
+.bg-very-light-danger {
+  background: linear-gradient(135deg, #f8d7da, #ffe0e0);
+  color: $primary-dark;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: inset 0 0 15px rgba(255, 0, 183, 0.1);
+  font-weight: 600;
+}

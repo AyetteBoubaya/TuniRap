@@ -1,0 +1,61 @@
+<div class="event-management">
+  <div class="header">
+    <h1>Gestion des Événements</h1>
+   <button class="btn btn-primary" (click)="openCreateEventDialog()">
+  <i class="fas fa-plus"></i> Créer
+</button>
+  </div>
+
+  <div class="filters">
+    <input class="form-control" [(ngModel)]="searchTerm" placeholder="Rechercher..." (input)="applyFilters()">
+    <select class="form-control" [(ngModel)]="statusFilter" (change)="applyFilters()">
+      <option value="all">Tous</option>
+      <option value="available">Disponibles</option>
+      <option value="soldOut">Complets</option>
+    </select>
+    <select class="form-control" [(ngModel)]="sortBy" (change)="applyFilters()">
+      <option value="date">Date</option>
+      <option value="popularity">Popularité</option>
+    </select>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <i class="fas fa-spinner fa-spin fa-2x"></i>
+  </div>
+
+  <div class="event-list">
+    <div *ngFor="let event of filteredEvents" class="event-card card mb-3">
+      <div class="card-header" [ngClass]="{'bg-success text-white': event.validated, 'bg-warning': !event.validated}">
+        {{ event.validated ? 'Validé' : 'En attente' }}
+        <span *ngIf="isEventSoldOut(event.id)" class="badge bg-danger float-end">COMPLET</span>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ event.title }}</h5>
+        <p class="card-text">
+          <i class="fas fa-calendar-alt"></i> {{ event.date | date:'mediumDate' }}<br>
+          <i class="fas fa-map-marker-alt"></i> {{ event.location }}
+        </p>
+        <div class="ticket-info">
+          <h6>Billets disponibles</h6>
+          <div *ngFor="let category of getEventCategories(event)" class="ticket-category row">
+            <div class="col-5">{{ category }}</div>
+            <div class="col-3">{{ getRemainingTickets(event, category) }}/{{ getTotalTickets(event, category) }}</div>
+            <div class="col-4 text-end">{{ getCategoryPrice(event, category) | currency:'EUR' }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-sm btn-primary me-2" (click)="openEditDialog(event)">
+          <i class="fas fa-edit"></i> Modifier
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="deleteEvent(event.id)">
+          <i class="fas fa-trash"></i> Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && filteredEvents.length === 0" class="alert alert-info">
+    <i class="fas fa-info-circle"></i> Aucun événement trouvé
+  </div>
+</div>

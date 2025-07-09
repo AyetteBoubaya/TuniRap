@@ -1,0 +1,30 @@
+/* Styles des messages */
+.chat-content {
+  p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+  }
+}
+
+.chat-left .chat-content p {
+  background: #f1f3f5;
+  border-top-left-radius: 5px;
+}
+
+.chat:not(.chat-left) .chat-content p {
+  background: #007bff;
+  color: white;
+  border-top-right-radius: 5px;
+  float: right;
+}
+
+.time {
+  clear: both;
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin: 5px 0;
+}

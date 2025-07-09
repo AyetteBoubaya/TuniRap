@@ -1,0 +1,526 @@
+<!--Statistics cards Starts-->
+<div class="row" (resized)="onResized($event)" @cardAnimation>
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-purple-love">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{totalCourses}}</h3>
+              <span>Total Events</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-book font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-ibiza-sunset">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{totalEnrollments}}</h3>
+              <span>Total Artists</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-users font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12 col-12" @cardAnimation>
+    <div class="card gradient-mint">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">{{topRatedCourses[0]?.rate | number: '1.1-1' || 'N/A'}}</h3>
+              <span>Top Evets Rating</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-star font-large-1"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!--Statistics cards Ends-->
+
+
+<!-- Top Courses Section -->
+<div class="row match-height">
+  <div class="col-xl-6 col-lg-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Top Rated Events</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table text-center m-0" @tableAnimation>
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Rating</th>
+                  <th>Enrollments</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of topRatedCourses">
+                  <td>{{course.title}}</td>
+                  <td>
+                    <span class="badge badge-pill bg-light-success">
+                      {{course.rate | number:'1.1-1'}}
+                    </span>
+                  </td>
+                  <td>{{course.studentIds?.length || 0}}</td>
+                  <td>
+                    <span class="badge" [style.background-color]="getCategoryColor(course.categoryCourse)">
+                      {{course.categoryCourse}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12 col-12" @cardAnimation>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Most Enrolled Courses</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table text-center m-0" @tableAnimation>
+              <thead>
+                <tr>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of mostEnrolledCourses">
+                  <td>{{course.title}}</td>
+                  <td>
+                    <span class="badge badge-pill bg-light-primary">
+                      {{course.studentIds?.length || 0}}
+                    </span>
+                  </td>
+                  <td>{{course.rate | number:'1.1-1'}}</td>
+                  <td>
+                    <span class="badge" [style.background-color]="getCategoryColor(course.categoryCourse)">
+                      {{course.categoryCourse}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Enrollments by Category Chart -->
+<div class="row" @cardAnimation>
+  <div class="col-12">
+    <div class="card animated-border p-6 rounded-xl shadow-lg">
+      <div class="card-header">
+        <h2><b>Top 10 music</b></h2>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <div id="enrollments-by-category">
+            <!--<x-chartist class="height-350" [data]="enrollmentsByCategory.data" [type]="enrollmentsByCategory.type"
+              [options]="enrollmentsByCategory.options" [responsiveOptions]="enrollmentsByCategory.responsiveOptions"
+              [events]="enrollmentsByCategory.events">
+            </x-chartist>!-->
+
+            <!-- Video Carousel Section -->
+            <div class="row mt-4">
+              <div class="col-12">
+                <h4 class="mb-3">♪♫♪♬</h4>
+
+                <!-- Swiper Container with Bootstrap classes -->
+                <div class="swiper-container" [swiper]="swiperConfig">
+                  <div class="swiper-wrapper">
+
+                    <!-- Slide 1 - Apex React -->
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://youtu.be/iqbs6k52Fds" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/Makina.jpg" class="card-img-top" alt="Apex React">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Makina</h5>
+                            <p class="card-text text-dark"><b>A.L.A en collaboration avec Mootjeyek</b>.
+                              <br>Rap Song
+                            </p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://youtu.be/DGNaajZXMf4" target="_blank" style="color: rgb(111, 3, 3);">Sad Rap
+                            Song</a>
+                          <small class="text-muted"></small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Slide 2 - Materialize -->
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://youtu.be/DGNaajZXMf4" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/mortadha.jpg" class="card-img-top" alt="Materialize">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">2000 saf7a</h5>
+                            <p class="card-text text-dark"><b> Moratadha nouveau single</b></p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank"
+                            style="color: rgb(111, 3, 3);">tunisian Song</a>
+                          <small class="text-muted"></small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://youtu.be/8nVzGvbW79Y" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/heya.jpg" class="card-img-top" alt="Materialize">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Heya</h5>
+                            <p class="card-text text-dark"><b>#1 Meilleur Rap song pour les filles avec hijab</b></p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank"
+                            style="color: rgb(111, 3, 3);">More Related</a>
+                          <small class="text-muted">1,769 views</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://youtu.be/cPA62eNfgfs" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/scarako.jpg" class="card-img-top" alt="Materialize">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Hobek Safe7</h5>
+                            <p class="card-text text-muted">#1 Selling & Most Popular Material Design Admin Template of
+                              All Time</p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank"
+                            class="text-primary">More Related</a>
+                          <small class="text-muted">1,769 views</small>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/materialize.jpg" class="card-img-top" alt="Materialize">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Materialize</h5>
+                            <p class="card-text text-muted">#1 Selling & Most Popular Material Design Admin Template of
+                              All Time</p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank"
+                            class="text-primary">More Related</a>
+                          <small class="text-muted">1,769 views</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://www.youtube.com/watch?v=lrmxTDWpie8&list=RDfnOY489R1qI&index=4"
+                          target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/materialize.jpg" class="card-img-top" alt="Materialize">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Cheb Khaled</h5>
+                            <p class="card-text text-muted">#1 Selling & Most Popular Material Design Admin Template of
+                              All Time</p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=ik9Nf7idrXY" target="_blank"
+                            class="text-primary">More Related</a>
+                          <small class="text-muted">1,769 views</small>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Slide 3 - Modern Admin -->
+                    <div class="swiper-slide p-2">
+                      <div class="card h-100">
+                        <a href="https://www.youtube.com/watch?v=e7QTyzx-lYE" target="_blank">
+                          <div class="position-relative">
+                            <img src="assets/img/pages/modern.jpg" class="card-img-top" alt="Modern Admin">
+                            <div
+                              class="position-absolute top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center bg-dark bg-opacity-25">
+                              <i class="ft-play-circle text-white fs-1"></i>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Modern Admin</h5>
+                            <p class="card-text text-muted">The most complete & feature packed bootstrap 4 admin
+                              template of 2019!</p>
+                          </div>
+                        </a>
+                        <div class="card-footer bg-transparent d-flex justify-content-between">
+                          <a href="https://www.youtube.com/watch?v=e7QTyzx-lYE" target="_blank"
+                            class="text-primary">Youtube Results</a>
+                          <small class="text-muted">4 Year ago</small>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+              <!-- Navigation Arrows - Using Bootstrap icons -->
+              <div class="swiper-button-next bg-light-primary rounded-circle p-2 shadow"></div>
+              <div class="swiper-button-prev bg-light-primary rounded-circle p-2 shadow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---->
+<!-- Modal Backdrop avec animation -->
+
+
+<!-- Section principale -->
+<div class="row" @cardAnimation>
+  <div class="col-12">
+    <div class="card animated-border p-6 rounded-xl shadow-lg">
+      <!-- Titre -->
+      <div class="card-header">
+        <h2><b>Événements à venir en Tunisie</b></h2>
+      </div>
+
+      <!-- Contenu de la carte -->
+      <div class="card-body">
+        <div class="row">
+
+          <!-- Boucle sur les événements -->
+          <div class="col-md-3 col-sm-6 mb-4" *ngFor="let event of events">
+            <div class="card h-100 event-card" (click)="openModal(event)" [@fadeInUp]>
+
+              <!-- Image de l'événement -->
+              <img [src]="event.image" class="card-img-top" [alt]="event.title">
+
+              <!-- Corps de la carte -->
+              <div class="card-body">
+                <h5 class="card-title">{{event.title}}</h5>
+
+                <!-- Badge type et date -->
+                <div class="d-flex justify-content-between mb-2">
+                  <span class="badge" [ngClass]="'bg-' + event.type.color">
+                    {{event.type.name}}
+                  </span>
+                  <small class="text-muted">{{event.date | date:'dd MMM yyyy'}}</small>
+                </div>
+
+                <!-- Lieu -->
+                <p class="card-text text-truncate">
+                  <i class="fas fa-map-marker-alt"></i> {{event.location}}
+                </p>
+              </div>
+
+              <!-- Pied de la carte -->
+              <div class="card-footer bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted" *ngIf="event.price > 0">
+                    <i class="fas fa-ticket-alt"></i> {{event.remainingTickets}} restants
+                  </small>
+                  <small class="text-success" *ngIf="event.price === 0">Gratuit</small>
+                  <span class="badge bg-light text-dark">
+                    {{event.price > 0 ? (event.price + ' DT') : ''}}
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Fin boucle événement -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de détails de l'événement -->
+<div class="modal fade" [class.show]="showModal" [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- En-tête modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">{{selectedEvent?.title}}</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <!-- Corps modal -->
+      <div class="modal-body">
+        <div class="row">
+
+          <!-- Image -->
+          <div class="col-md-6">
+            <img [src]="selectedEvent?.image" class="img-fluid rounded" [alt]="selectedEvent?.title">
+          </div>
+
+          <!-- Infos événement -->
+          <div class="col-md-6">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong><i class="fas fa-calendar-alt me-2"></i>Date :</strong>
+                {{selectedEvent?.date | date:'fullDate'}}
+              </li>
+              <li class="list-group-item">
+                <strong><i class="fas fa-clock me-2"></i>Heure :</strong>
+                {{selectedEvent?.time}}
+              </li>
+              <li class="list-group-item">
+                <strong><i class="fas fa-map-marker-alt me-2"></i>Lieu :</strong>
+                {{selectedEvent?.location}}
+              </li>
+              <li class="list-group-item">
+                <strong><i class="fas fa-user me-2"></i>Artiste(s) :</strong>
+                {{selectedEvent?.artists}}
+              </li>
+              <li class="list-group-item">
+                <strong><i class="fas fa-building me-2"></i>Organisateur :</strong>
+                {{selectedEvent?.organizer}}
+              </li>
+              <li class="list-group-item">
+                <strong><i class="fas fa-info-circle me-2"></i>Description :</strong>
+                {{selectedEvent?.description}}
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Pied modal -->
+      <div class="modal-footer d-flex justify-content-between">
+        <div>
+          <span class="badge" [ngClass]="'bg-' + selectedEvent?.type.color">
+            {{selectedEvent?.type.name}}
+          </span>
+          <span class="ms-2">
+            <i class="fas fa-ticket-alt"></i>
+            {{selectedEvent?.remainingTickets}}/{{selectedEvent?.totalTickets}} tickets
+          </span>
+        </div>
+        <div>
+          <button class="btn btn-outline-secondary me-2" (click)="closeModal()">Fermer</button>
+          <button class="btn btn-primary" (click)="participate(selectedEvent)">
+            {{selectedEvent?.price > 0 ? 'Acheter (' + selectedEvent?.price + ' DT)' : 'Participer gratuitement'}}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop modal -->
+<div class="modal-backdrop fade" [class.show]="showModal" [style.display]="showModal ? 'block' : 'none'"></div>
+
+
+<div id="chatbot-icon" (click)="toggleChat()">
+  <img src="assets\img\pages\Tlogo.png" alt="Chatbot" classe="logo"/>
+</div>
+
+<div id="chatbot-card">
+  <div class="chat-header">
+    <h3>TuniRapperBot</h3>
+  </div>
+
+  <div class="chat-body">
+    <div *ngFor="let msg of messages">
+      <div [ngClass]="msg.sender">{{ msg.text }}</div>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input [(ngModel)]="userInput" placeholder="Pose ta question..." />
+    <button (click)="sendMessage()">Envoyer</button>
+  </div>
+</div> 
+
+
+<!-- Loading Indicator -->
+<div *ngIf="loadingStats" class="loading-overlay">
+  <div class="spinner-border text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

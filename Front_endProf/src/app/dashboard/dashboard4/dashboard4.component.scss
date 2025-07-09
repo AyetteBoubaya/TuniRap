@@ -1,0 +1,404 @@
+// 🎨 Variables Couleurs Modernes & Fresh
+$color-violet: #8b5cf6;
+$color-violet-dark: #6d28d9;
+$color-violet-light: #a78bfa;
+
+$color-mint: #10b981;
+$color-mint-dark: #047857;
+
+$color-red: #ef4444;
+$color-red-dark: #b91c1c;
+
+$color-yellow: #fbbf24;
+
+$bg-light-opacity: rgba(255, 255, 255, 0.7);
+$bg-card-blur: 16px;
+$shadow-card: 0 12px 40px rgba(139, 92, 246, 0.15);
+
+$border-radius: 1.25rem;
+$transition-default: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-fast: all 0.3s ease-in-out;
+
+$font-family-base: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$text-color-default: #222;
+
+// === Mode clair ===
+$bg-gradient-start: $color-violet;
+$bg-gradient-mid: $color-violet-dark;
+$bg-gradient-end: $color-violet-light;
+
+// === Mode sombre (en bonus) ===
+$dark-bg: #121214;
+$dark-bg-alt: #1c1c24;
+$dark-text: #eee;
+
+// 🌐 Styles globaux
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: $font-family-base;
+  color: $text-color-default;
+
+  background: linear-gradient(
+    -45deg, 
+    $bg-gradient-start, 
+    $bg-gradient-mid, 
+    $bg-gradient-end, 
+    $bg-gradient-start
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+// Animation dégradé fluide
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// Animation d’ombre pulsante
+@keyframes shadowPulse {
+  0%, 100% {
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+  }
+}
+
+// 📦 Container et carte
+.container {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: $bg-light-opacity;
+  backdrop-filter: blur($bg-card-blur);
+  border-radius: $border-radius;
+  border: none;
+  padding: 2rem;
+  transition: $transition-default;
+  will-change: transform, box-shadow;
+
+  // Animation d’ombre pulsante continue
+  animation: shadowPulse 4s ease-in-out infinite;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgb(138, 92, 246);
+    animation: none; // désactive l’animation au hover
+  }
+
+  &-header {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: $border-radius $border-radius 0 0;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: $color-violet-dark;
+  }
+}
+
+// 🗂️ Tables modernes
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.8rem;
+
+  th, td {
+    padding: 1.2rem 1.5rem;
+    vertical-align: middle;
+    border: none;
+  }
+
+  thead th {
+    color: $color-violet-dark;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  tbody tr {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 18px rgba(139, 92, 246, 0.1);
+    border-radius: $border-radius;
+    transition: background-color 0.35s ease, box-shadow 0.35s ease;
+
+    &:hover {
+      background-color: #f4f5ff;
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.15);
+    }
+  }
+}
+
+// 🎛️ Inputs & selects élégants
+.form-select,
+.form-control {
+  border-radius: $border-radius;
+  border: 2px solid rgba(139, 92, 246, 0.25);
+  padding: 0.65rem 1.2rem;
+  font-size: 1rem;
+  background-color: #fff;
+  color: $text-color-default;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: $color-violet;
+    box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.25);
+    outline: none;
+  }
+}
+
+// 🎯 Boutons raffinés
+.btn {
+  border-radius: $border-radius;
+  font-weight: 700;
+  padding: 0.65rem 1.8rem;
+  cursor: pointer;
+  user-select: none;
+  transition: $transition-default;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  &-primary {
+    background: linear-gradient(135deg, $color-violet, $color-violet-dark);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba($color-violet-dark, 0.4);
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(135deg, $color-violet-dark, $color-violet);
+      box-shadow: 0 12px 32px rgba($color-violet-dark, 0.6);
+      outline: none;
+    }
+  }
+
+  &-success {
+    background: linear-gradient(135deg, $color-mint, $color-mint-dark);
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(135deg, $color-mint-dark, $color-mint);
+      box-shadow: 0 12px 32px rgba($color-mint-dark, 0.6);
+      outline: none;
+    }
+  }
+
+  &-danger {
+    background: linear-gradient(135deg, $color-red, $color-red-dark);
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(135deg, $color-red-dark, $color-red);
+      box-shadow: 0 12px 32px rgba($color-red-dark, 0.6);
+      outline: none;
+    }
+  }
+
+  &-outline-info {
+    border: 2px solid $color-violet;
+    background: transparent;
+    color: $color-violet;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+      background: $color-violet;
+      color: #fff;
+      box-shadow: 0 12px 32px rgba($color-violet-dark, 0.4);
+      outline: none;
+    }
+  }
+
+  &-sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+// 🏷️ Badges dynamiques
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.95em;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  user-select: none;
+  transition: background-color 0.3s ease;
+
+  &.text-bg-warning {
+    background-color: $color-yellow;
+  }
+
+  &.text-bg-success {
+    background-color: $color-mint;
+  }
+
+  &.text-bg-danger {
+    background-color: $color-red;
+  }
+}
+
+// 📖 Collapse stylisé
+.collapse .card-body {
+  background: #fff;
+  border-left: 6px solid $color-violet;
+  border-radius: $border-radius;
+  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.1);
+  padding: 2rem;
+  transition: $transition-default;
+}
+
+// 📢 Alertes légères
+.alert {
+  border-radius: $border-radius;
+  padding: 1.2rem 2rem;
+  border: none;
+  font-weight: 700;
+  color: $color-violet-dark;
+
+  &-info {
+    background: rgba(139, 92, 246, 0.15);
+    border-left: 6px solid $color-violet;
+  }
+}
+
+// ✏️ Titres nets et modernes
+h2, h3, h4 {
+  font-weight: 800;
+  color: $color-violet-dark;
+  letter-spacing: 0.04em;
+  margin-bottom: 2rem;
+}
+
+// 📌 Liens et boutons accessibles & doux
+a, button {
+  transition: $transition-default;
+  outline-offset: 4px;
+
+  &:focus-visible {
+    outline: 3px solid rgba(139, 92, 246, 0.4);
+    outline-offset: 4px;
+  }
+}
+
+// ———————————————————
+// BONUS : Mode sombre simplifié
+// ———————————————————
+@media (prefers-color-scheme: dark) {
+  body {
+    background: $dark-bg;
+    color: $dark-text;
+  }
+
+  .card {
+    background: rgba(30, 30, 40, 0.7);
+    box-shadow: 0 12px 40px rgba(110, 80, 230, 0.5);
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 20px 48px rgba(110, 80, 230, 0.7);
+    }
+
+    &-header {
+      color: $color-violet-light;
+      border-bottom-color: rgba(167, 139, 250, 0.35);
+    }
+  }
+
+  .table tbody tr {
+    background: rgba(40, 40, 55, 0.7);
+
+    &:hover {
+      background-color: rgba(70, 60, 110, 0.8);
+      box-shadow: 0 10px 28px rgba(167, 139, 250, 0.3);
+    }
+  }
+
+  .form-select,
+  .form-control {
+    background-color: #222;
+    border-color: rgba(167, 139, 250, 0.35);
+    color: #ddd;
+
+    &:focus {
+      border-color: $color-violet-light;
+      box-shadow: 0 0 0 6px rgba(167, 139, 250, 0.25);
+    }
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, $color-violet-light, $color-violet-dark);
+  }
+}
+@keyframes multiColorShadowPulse {
+  0%, 100% {
+    box-shadow:
+      0 12px 40px rgba(139, 92, 246, 0.3),     /* violet */
+      0 0 30px rgba(236, 72, 153, 0.3),        /* rose */
+      0 0 40px rgba(59, 130, 246, 0.3);        /* bleu */
+  }
+  33% {
+    box-shadow:
+      0 14px 45px rgba(236, 72, 153, 0.5),     /* rose */
+      0 0 35px rgba(16, 185, 129, 0.5),        /* vert */
+      0 0 45px rgba(139, 92, 246, 0.5);        /* violet */
+  }
+  66% {
+    box-shadow:
+      0 16px 50px rgba(59, 130, 246, 0.6),     /* bleu */
+      0 0 40px rgba(139, 92, 246, 0.6),        /* violet */
+      0 0 50px rgba(236, 72, 153, 0.6);        /* rose */
+  }
+}
+@keyframes multiColorShadowPulse {
+  0%, 100% {
+    box-shadow:
+      0 12px 40px rgba(138, 92, 246, 0.769),   /* violet */
+      0 0 30px rgba(236, 72, 154, 0.845),      /* rose */
+      0 0 50px rgba(16, 185, 129, 0.719);      /* mint */
+  }
+  50% {
+    box-shadow:
+      0 20px 60px rgba(139, 92, 246, 0.5),
+      0 0 50px rgba(236, 72, 153, 0.5),
+      0 0 70px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: multiColorShadowPulse 6s ease-in-out infinite;
+
+  &:hover,
+  &:focus-within {
+    animation: none;
+    box-shadow:
+      0 20px 60px rgba(139, 92, 246, 0.7),
+      0 0 50px rgba(236, 72, 153, 0.7),
+      0 0 60px rgba(16, 185, 129, 0.7);
+    transform: translateY(-6px);
+  }
+}

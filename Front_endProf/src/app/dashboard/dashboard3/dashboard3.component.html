@@ -1,0 +1,443 @@
+<div class="music-background">
+  <div class="col-md-12 col-lg-12">
+    <span class="animated-notes">♪♫♪♬</span>
+    <div class="card shadow rounded-4 border-0">
+      <div class="card-header bg-dark text-white d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-microphone-alt fa-2x me-3 pulse-icon"></i>
+          <br><br>
+          <h2 class="mb-0 prod">
+            My Products
+          </h2>
+          <span class="animated-notes">♪♫♪♬</span>
+        </div>
+      </div>
+
+
+      <div class="card-body text-white">
+        <div class="card-body">
+          <ul ngbNav #basicnav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>My Discographie</a>
+              <ng-template ngbNavContent>
+
+                <div class="card">
+                  <div class="card-header bg-primary text-white">
+                    <h5>Create Discographie</h5>
+                  </div>
+                  <div class="card-body">
+                    <form (ngSubmit)="onDiscographieSubmit()">
+                      <div class="form-group">
+                        <label>Bio</label>
+                        <textarea class="form-control" [(ngModel)]="discographieRequest.bio" name="bio"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Principal Genre</label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.genrePrincipal"
+                          name="genrePrincipal">
+                      </div>
+                      <div class="form-group">
+                        <label>Album </label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.albumsId"
+                          name="albumsId">
+                      </div>
+                      <div class="form-group">
+                        <label>Track</label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.tracksId"
+                          name="tracksId">
+                      </div>
+                      <div class="form-group">
+                        <label>Playlists</label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.playlistsId"
+                          name="playlistsId">
+                      </div>
+                      <div class="form-group">
+                        <label>Singles </label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.singlesId"
+                          name="singlesId">
+                      </div>
+                      <div class="form-group">
+                        <label>Collaborations</label>
+                        <input type="text" class="form-control" [(ngModel)]="discographieRequest.collaborations"
+                          name="collaborations">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-success">Edit</button>
+                      <button type="submit" class="btn btn-dark">Delete</button>
+                    </form>
+                  </div>
+                </div>
+                <!--<div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-info text-white">
+                        <h5>Discographie List</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Principal Genre</th>
+                                <th>Total Albums</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let discographie of discographies">
+                                <td>{{discographie.discographieId}}</td>
+                                <td>{{discographie.genrePrincipal}}</td>
+                                <td>{{discographie.totalAlbums}}</td>
+                                <td>
+                                  <button class="btn btn-sm btn-warning mr-2">Edit</button>
+                                  <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div-->
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>My Albums</a>
+              <ng-template ngbNavContent>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-primary text-white">
+                        <h5>Album</h5>
+                      </div>
+                      <div class="card-body">
+                        <form (ngSubmit)="onAlbumSubmit()">
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" [(ngModel)]="albumRequest.title" name="title"
+                              required>
+                          </div>
+                          <div class="form-group">
+                            <label>Release Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="albumRequest.releaseDate"
+                              name="releaseDate">
+                          </div>
+                          <div class="form-group">
+                            <label>Cover URL</label>
+                            <input type="text" class="form-control" [(ngModel)]="albumRequest.cover" name="cover">
+                          </div>
+                          <div class="form-group">
+                            <label>Track Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="albumRequest.trackIds" name="trackIds">
+                          </div>
+                          <div class="form-group">
+                            <label>Genres (comma separated)</label>
+                            <input type="text" class="form-control" [(ngModel)]="albumRequest.genres" name="genres">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-success">Edit</button>
+                          <button type="submit" class="btn btn-dark">Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-info text-white">
+                        <h5>Album List</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Release Date</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let album of albums">
+                                <td>{{album.albumId}}</td>
+                                <td>{{album.title}}</td>
+                                <td>{{album.releaseDate | date}}</td>
+                                <td>
+                                  <button class="btn btn-sm btn-warning mr-2">Edit</button>
+                                  <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+              <a ngbNavLink>My Playlists</a>
+              <ng-template ngbNavContent>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-primary text-white">
+                        <h5>Create Playlist</h5>
+                      </div>
+                      <div class="card-body">
+                        <form (ngSubmit)="onPlaylistSubmit()">
+                          <div class="form-group">
+                            <label>Playlist ID</label>
+                            <input type="text" class="form-control" [(ngModel)]="playlistRequest.playlistId"
+                              name="playlistId" required>
+                          </div>
+                          <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="playlistRequest.name" name="name"
+                              required>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-success">Edit</button>
+                          <button type="submit" class="btn btn-dark">Delete</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header bg-info text-white">
+                        <h5>Playlist List</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let playlist of playlists">
+                                <td>{{playlist.playlistId}}</td>
+                                <td>{{playlist.name}}</td>
+                                <td>
+                                  <button class="btn btn-sm btn-warning mr-2">Edit</button>
+                                  <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+              <a ngbNavLink>My Trakcs</a>
+              <ng-template ngbNavContent>
+                <div class="tab-pane fade show active" id="track" role="tabpanel">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header bg-primary text-white">
+                          <h5>Create Track</h5>
+                        </div>
+                        <div class="card-body">
+                          <form (ngSubmit)="onTrackSubmit()">
+                            <div class="form-group">
+                              <label>Title</label>
+                              <input type="text" class="form-control" [(ngModel)]="trackRequest.title" name="title"
+                                required>
+                            </div>
+                            <div class="form-group">
+                              <label>Popularity</label>
+                              <input type="number" class="form-control" [(ngModel)]="trackRequest.popularity"
+                                name="popularity">
+                            </div>
+                            <div class="form-group">
+                              <label>Duration (ms)</label>
+                              <input type="number" class="form-control" [(ngModel)]="trackRequest.duration"
+                                name="duration">
+                            </div>
+                            <div class="form-group form-check">
+                              <input type="checkbox" class="form-check-input" [(ngModel)]="trackRequest.explicit"
+                                name="explicit">
+                              <label class="form-check-label">Explicit</label>
+                            </div>
+                            <div class="form-group">
+                              <label>Preview URL</label>
+                              <input type="text" class="form-control" [(ngModel)]="trackRequest.previewURL"
+                                name="previewURL">
+                            </div>
+                            <div class="form-group">
+                              <label>Track Number</label>
+                              <input type="number" class="form-control" [(ngModel)]="trackRequest.trackNumber"
+                                name="trackNumber">
+                            </div>
+                            <div class="form-group">
+                              <label>Featurings (comma separated)</label>
+                              <input type="text" class="form-control" [(ngModel)]="trackRequest.featurings"
+                                name="featurings">
+                            </div>
+                            <div class="form-group">
+                              <label>Cover URL</label>
+                              <input type="text" class="form-control" [(ngModel)]="trackRequest.cover" name="cover">
+                            </div>
+                            <div class="form-group">
+                              <label>Release Date</label>
+                              <input type="date" class="form-control" [(ngModel)]="trackRequest.releaseDate"
+                                name="releaseDate">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-success">Edit</button>
+                            <button type="submit" class="btn btn-dark">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header bg-info text-white">
+                          <h5>Track List</h5>
+                        </div>
+                        <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Title</th>
+                                  <th>Popularity</th>
+                                  <th>Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let track of tracks">
+                                  <td>{{track.trackId}}</td>
+                                  <td>{{track.title}}</td>
+                                  <td>{{track.popularity}}</td>
+                                  <td>
+                                    <button class="btn btn-sm btn-warning mr-2">Edit</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="5">
+              <a ngbNavLink>My Collaborations</a>
+              <ng-template ngbNavContent>
+
+                <div class="collab-container">
+  <div class="header-actions">
+    <h2>Collaborations</h2>
+    <button class="btn send-request-btn" (click)="showRequestForm = !showRequestForm">
+      Envoyer une demande
+    </button>
+  </div>
+
+  <!-- Formulaire d'envoi de demande -->
+  <div *ngIf="showRequestForm" class="request-form-card">
+    <h3>Nouvelle Demande</h3>
+    <input type="text" placeholder="Sujet" [(ngModel)]="newRequest.subject" />
+    <textarea placeholder="Description" [(ngModel)]="newRequest.description"></textarea>
+
+    <select [(ngModel)]="newRequest.collaborationType">
+      <option value="" disabled selected>Sélectionnez un type</option>
+      <option value="FEAT">Feat</option>
+      <option value="EVENT">Organisation d’événement</option>
+      <option value="AUTRE">Autre</option>
+    </select>
+
+    <input type="text" placeholder="Votre nom" [(ngModel)]="newRequest.senderName" />
+
+    <button class="btn accept-btn" (click)="sendRequest()">Envoyer</button>
+  </div>
+
+  <!-- Liste des collaborations -->
+  <div *ngFor="let collab of collaborations" class="collab-card">
+    <div class="card-header">
+      <h3>{{ collab.subject }}</h3>
+      <div class="card-actions-right">
+        <span class="status-badge" [ngClass]="collab.status.toLowerCase()">{{ collab.status }}</span>
+        <button *ngIf="collab.status === 'ACCEPTED'" class="messenger-btn" (click)="openMessenger(collab)">
+          💬
+        </button>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Type :</strong> {{ collab.collaborationType }}</p>
+      <p><strong>Description :</strong> {{ collab.description }}</p>
+      <p><strong>Date :</strong> {{ collab.creationDate }}</p>
+      <p><strong>Envoyée par :</strong> {{ collab.senderName }}</p>
+    </div>
+
+    <div *ngIf="collab.status === 'PENDING'" class="card-actions">
+      <button (click)="respond(collab, true)" class="btn accept-btn">Accepter</button>
+      <button (click)="respond(collab, false)" class="btn reject-btn">Refuser</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="6">
+              <a ngbNavLink>Événements</a>
+              <ng-template ngbNavContent>
+                <div class="events-card">
+                  <h2 class="title">🎉 Événements à venir</h2>
+                  <div class="events-list">
+                    <div class="event-card" *ngFor="let event of events">
+                      <img [src]="event.image" [alt]="event.title" class="event-image" />
+
+                      <div class="event-content">
+                        <span class="badge" [ngClass]="event.type.color">{{ event.type.name }}</span>
+                        <h3 class="event-title">{{ event.title }}</h3>
+                        <p class="event-date">📅 {{ event.date | date:'dd MMMM y' }} | 🕒 {{ event.time }}</p>
+                        <p class="event-location">📍 {{ event.location }}</p>
+                        <p class="event-tickets">🎟️ {{ event.remainingTickets }} places restantes</p>
+                        <p class="event-price">💶 {{ event.price }} TND</p>
+
+                        <button (click)="openParticipation(event.id)">Participer</button>
+
+                        <div *ngIf="selectedEventId === event.id">
+                          <input type="text" [(ngModel)]="participationName" placeholder="Votre nom">
+                          <textarea [(ngModel)]="participationMessage" placeholder="Votre message"></textarea>
+                          <button (click)="submitParticipation()">Envoyer</button>
+                          <button (click)="cancelParticipation()">Annuler</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="basicnav" class="mt-2"></div>
+          <span class="animated-notes">♪♫♪♬</span>
+          <pre>Active: {{ active }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>

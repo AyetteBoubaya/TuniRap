@@ -1,0 +1,181 @@
+/* General Layout */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Table Styles */
+.table-container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.table-container:hover {
+  transform: scale(1.02);
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.user-table th, .user-table td {
+  padding: 16px 24px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.user-table th {
+  background-color: #f7fafc;
+  color: #4a5568;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.table-row:hover {
+  background-color: #f7fafc;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Button Styles */
+.actions button {
+  margin-right: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.edit-btn {
+  background-color: #fbbf24;
+  color: white;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #f59e0b;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Form Styles */
+.edit-form {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.edit-form:hover {
+  transform: scale(1.02);
+}
+
+.edit-form h3 {
+  font-size: 28px;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 16px;
+  background-color: #f7fafc;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.input-field::placeholder {
+  color: #a0aec0;
+}
+
+/* Button Styles */
+.save-btn, .cancel-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.save-btn {
+  background-color: #48bb78;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #38a169;
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+.cancel-btn:hover {
+  background-color: #cbd5e0;
+  transform: translateY(-2px);
+}
+
+/* Hover effect for button */
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 1.5rem;
+  }
+
+  .user-table th, .user-table td {
+    padding: 10px;
+  }
+
+  .edit-form {
+    padding: 2rem;
+    max-width: 100%;
+  }
+
+  .input-field {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .save-btn, .cancel-btn {
+    padding: 10px 22px;
+  }
+}
