@@ -168,5 +168,5 @@ python scraping.py
 
 ## 👤 Auteur
 
-Projet réalisé à l'ESPRIT dans le cadre de mon apprentissage des architectures microservices.
-*Ajoutez ici votre nom, votre lien LinkedIn et le nom de vos coéquipiers s'il y en a.*
+Projet réalisé dans le cadre de mon apprentissage des architectures microservices.
+*Ayette Boubaya, LinkedIn: https://www.linkedin.com/in/ayette-boubaya-a05621398/ .*
