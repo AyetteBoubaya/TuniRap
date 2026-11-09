@@ -86,21 +86,6 @@ Les artistes rap tunisiens sont dispersés entre plusieurs plateformes. TuniRap 
 **Front-end** : Angular 14 · Bootstrap · ApexCharts
 **Outils** : Maven · Docker · Docker Compose · Swagger · Python (spotipy, pandas)
 
----
-
-## 📸 Aperçu
-
-*Ajoutez ici 3 ou 4 captures d'écran : tableau de bord Eureka avec les services enregistrés, interface Angular, Swagger d'un service, chat en direct.*
-
-```
-docs/
-├── eureka-dashboard.png
-├── swagger-catalogue.png
-└── app-home.png
-```
-
----
-
 ## 📚 Ce que j'ai appris
 
 Ce projet m'a surtout appris ce qui **ne se voit pas** dans un tutoriel :
